@@ -30,7 +30,8 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    private String register(Model model) {
+    private String register(Model model, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") != null) return "redirect:/";
         if (!model.containsAttribute("userRegistrationBindingModel")) {
             model
                     .addAttribute(
@@ -62,7 +63,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    private String login(Model model) {
+    private String login(Model model, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") != null) return "redirect:/";
+
         if (!model.containsAttribute("userLoginBindingModel")) {
             model
                     .addAttribute(
@@ -102,7 +105,7 @@ public class UserController {
 
     @GetMapping("/logout")
     private String logout(HttpSession httpSession) {
-        httpSession.invalidate();
+        if (httpSession.getAttribute("user") != null) httpSession.invalidate();
         return "redirect:/";
     }
 }

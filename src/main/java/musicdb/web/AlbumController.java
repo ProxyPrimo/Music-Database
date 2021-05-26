@@ -30,7 +30,9 @@ public class AlbumController {
     }
 
     @GetMapping("/add")
-    private String add(Model model) {
+    private String add(Model model, HttpSession httpSession) {
+        if (httpSession.getAttribute("user") == null) return "redirect:/users/login";
+
         if (!model.containsAttribute("albumAddBindingModel")) {
             model.addAttribute("albumAddBindingModel", new AlbumAddBindingModel());
         }
