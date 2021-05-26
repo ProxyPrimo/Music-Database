@@ -94,7 +94,7 @@ public class UserController {
             return "redirect:login";
         }
 
-        httpSession.setAttribute("user", userServiceModel);
+        httpSession.setAttribute("user", userServiceModel.getUsername());
 
         return "redirect:/";
     }

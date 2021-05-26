@@ -34,4 +34,9 @@ public class UserServiceImpl
         UserEntity userEntity = this.userRepository.findByUsernameAndPassword(username, password);
         return userEntity == null ? null : modelMapper.map(userEntity, UserServiceModel.class);
     }
+
+    @Override
+    public UserEntity findByUsername(String addedFromUsername) {
+        return userRepository.findByUsername(addedFromUsername);
+    }
 }

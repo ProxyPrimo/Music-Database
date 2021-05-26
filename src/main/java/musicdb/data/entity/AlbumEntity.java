@@ -14,7 +14,7 @@ public class AlbumEntity extends BaseEntity {
     private String description;
     private Integer copies;
     private BigDecimal price;
-    private LocalDate releasedDate;
+    private LocalDate releaseDate;
     private String Producer;
     private GenreName genre;
     private ArtistEntity artist;
@@ -69,13 +69,13 @@ public class AlbumEntity extends BaseEntity {
         this.price = price;
     }
 
-    @Column(name = "released_date", nullable = false)
-    public LocalDate getReleasedDate() {
-        return releasedDate;
+    @Column(name = "release_date", nullable = false)
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setReleasedDate(LocalDate releasedDate) {
-        this.releasedDate = releasedDate;
+    public void setReleaseDate(LocalDate releasedDate) {
+        this.releaseDate = releasedDate;
     }
 
     @Column

@@ -31,4 +31,9 @@ public class ArtistServiceImpl implements ArtistService {
                     });
         }
     }
+
+    @Override
+    public ArtistEntity findArtistByArtistName(ArtistName artist) {
+        return this.artistRepository.findByName(artist);
+    }
 }
