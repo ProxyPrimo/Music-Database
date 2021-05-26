@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl
+        implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
@@ -26,5 +27,11 @@ public class UserServiceImpl implements UserService {
                         this.modelMapper
                                 .map(userServiceModel, UserEntity.class)
                 );
+    }
+
+    @Override
+    public UserServiceModel findByUsernameAndPassword(String username, String password) {
+        UserEntity userEntity = this.userRepository.findByUsernameAndPassword(username, password);
+        return userEntity == null ? null : modelMapper.map(userEntity, UserServiceModel.class);
     }
 }

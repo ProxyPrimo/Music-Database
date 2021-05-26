@@ -1,36 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>My Music DB Application</title>
-    <link rel="stylesheet" href="/css/reset-css.css"/>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <th:block th:include="~{fragments/header}"></th:block>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg bg-nav rounded">
-        <a class="nav-link" href="/">
-            <img src="/img/headphones.png" width="40px" alt="HeadPhones picture">
-        </a>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav row">
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Login</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Register</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Add Album</a>
-                </li>
-                <li class="nav-item col-md-4">
-                    <a class="nav-link text-white active h5" href="/">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <th:block th:include="~{fragments/nav}"></th:block>
 </header>
 <main class="p-5 align-content-center bg-blur my-register-div my-main">
     <h1 class="text-light    border-bottom mb-5">Login</h1>
@@ -39,19 +14,26 @@
             <img alt="Metallica image" src="/img/metallica.jpg" class="w-50 rounded">
         </div>
         <div class="row g-3 align-items-center">
-            <form action="/" method="POST">
-                <h5 class="text-center text-light form-text bg-danger rounded">User doesn't exists</h5>
+            <form th:action="@{/users/login}"
+                  th:object="${userLoginBindingModel}"
+                  method="POST">
+                <h5 th:if="${notFound}" class="text-center text-light form-text bg-danger rounded">The user doesn't exist</h5>
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label text-light">Username</label>
                     </div>
                     <div class="col-auto">
-                        <input type="text" name="username" id="inputUsername" class="form-control"
+                        <input type="text" name="username"
+                               th:field="*{username}"
+                               th:errorclass="bg-danger"
+                               id="inputUsername" class="form-control"
                                aria-describedby="usernameHelpInline">
                     </div>
                     <div class="col-auto">
-                        <small id="usernameError" class="text-light form-text bg-danger rounded">Length must between 3
-                            and 20 characters</small>
+                        <small id="usernameError"
+                               th:if="${#fields.hasErrors('username')}"
+                               th:errors="*{username}"
+                               class="text-light form-text bg-danger rounded"></small>
                     </div>
                 </div>
                 <div>
@@ -59,12 +41,17 @@
                         <label for="inputPassword" class="col-form-label text-light">Password</label>
                     </div>
                     <div class="col-auto">
-                        <input type="password" name="password" id="inputPassword" class="form-control"
+                        <input type="password"
+                               th:field="*{password}"
+                               th:errorclass="bg-danger"
+                               name="password" id="inputPassword" class="form-control"
                                aria-describedby="passwordHelpInline">
                     </div>
                     <div class="col-auto">
-                        <small id="passwordError" class="text-light form-text bg-danger rounded">Length must between 5
-                            and 20 characters</small>
+                        <small id="passwordError"
+                               th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{username}"
+                               class="text-light form-text bg-danger rounded"></small>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-2">
@@ -76,11 +63,7 @@
     </div>
 </main>
 <footer class="footer bg-blur">
-    <div class="container-fluid text-center">
-        <div class="h5 text-white">
-            &copy;SoftUni Spring Team 2021. All rights reserved.
-        </div>
-    </div>
+    <th:block th:include="~{fragments/footer}"></th:block>
 </footer>
 </body>
 </html>
