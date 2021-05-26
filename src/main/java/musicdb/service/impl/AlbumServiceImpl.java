@@ -51,4 +51,9 @@ public class AlbumServiceImpl implements AlbumService {
     public Integer getCopiesCount() {
         return albumRepository.getCopiesCount();
     }
+
+    @Override
+    public void deleteAlbum(Long id) {
+        albumRepository.deleteById(id);
+    }
 }

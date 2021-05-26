@@ -11,4 +11,6 @@ public interface AlbumService {
     List<AlbumViewModel> showAllAlbums();
 
     Integer getCopiesCount();
+
+    void deleteAlbum(Long id);
 }
