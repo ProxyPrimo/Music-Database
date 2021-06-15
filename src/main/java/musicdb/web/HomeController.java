@@ -17,7 +17,7 @@ public class HomeController {
 
 
     @GetMapping("/")
-    private String index(HttpSession httpSession, Model model) {
+    public String index(HttpSession httpSession, Model model) {
         if (httpSession.getAttribute("user") == null) return "index";
 
         model.addAttribute("albums", albumService.showAllAlbums());

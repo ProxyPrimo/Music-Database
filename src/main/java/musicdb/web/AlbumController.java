@@ -31,7 +31,7 @@ public class AlbumController {
     }
 
     @GetMapping("/add")
-    private String add(Model model, HttpSession httpSession) {
+    public String add(Model model, HttpSession httpSession) {
         if (httpSession.getAttribute("user") == null) return "redirect:/users/login";
 
         if (!model.containsAttribute("albumAddBindingModel")) {
@@ -41,7 +41,7 @@ public class AlbumController {
     }
 
     @PostMapping("/add")
-    private String addConfirm(@Valid AlbumAddBindingModel albumAddBindingModel
+    public String addConfirm(@Valid AlbumAddBindingModel albumAddBindingModel
             , BindingResult bindingResult
             , RedirectAttributes redirectAttributes
             , HttpSession httpSession) {
@@ -65,7 +65,7 @@ public class AlbumController {
 
 
     @GetMapping("/delete/{id}")
-    private String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
         albumService.deleteAlbum(id);
         return "redirect:/";
     }
